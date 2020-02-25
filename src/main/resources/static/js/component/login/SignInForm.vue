@@ -36,7 +36,7 @@
 
                 this.$http.post('/login', formData).then(
                     result => {
-                        this.$router.replace('/main');
+                        this.$router.replace('/pay');
                     },
                     error => {
                         this.showAlert(true, false, 'Неверный логин или пароль');
