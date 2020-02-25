@@ -1,12 +1,12 @@
 <template>
     <div>
-        <Header/>
-        <Menu @change="change"/>
+        <Header @menu="openMenu = true"/>
         <main>
             <transition mode="out-in">
                 <router-view></router-view>
             </transition>
         </main>
+        <Menu :class="{'nav-open': openMenu}" @change="change"/>
     </div>
 </template>
 
@@ -19,9 +19,29 @@
     export default {
         name: "User",
         components: {BlockStats, BlockProfile, BlockPay, Menu, Header},
+        data() {
+            return {
+                openMenu: false
+            }
+        },
+        watch: {
+            openMenu() {
+                if (this.openMenu) {
+                    setTimeout(() =>
+                        document.addEventListener(
+                            'click', this.outsideClick
+                        ), 200);
+                } else {
+                    document.removeEventListener('click', this.outsideClick);
+                }
+            }
+        },
         methods: {
             change(target) {
                 this.$router.replace(target);
+            },
+            outsideClick() {
+                this.openMenu = false;
             }
         }
     }
@@ -45,9 +65,15 @@
         opacity: 1;
     }
     main {
-        margin: 80px 20px 20px 130px;
         display: flex;
+        margin: 80px 20px 20px 20px;
         justify-content: center;
+    }
+    @media (min-width: 700px) {
+        main {
+            margin-left: 130px;
+            margin-bottom: 20px;
+        }
     }
     section {
         flex: 0 1 1000px;

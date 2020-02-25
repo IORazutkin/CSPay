@@ -121,6 +121,7 @@
         padding-right: 10px;
         width: 140px;
         font-weight: normal;
+        margin-left: 10px;
     }
     .clearfix {
         margin-top: 10px;

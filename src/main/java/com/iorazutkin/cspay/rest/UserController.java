@@ -7,11 +7,9 @@ import com.iorazutkin.cspay.repo.ApartmentRepo;
 import com.iorazutkin.cspay.repo.HouseRepo;
 import com.iorazutkin.cspay.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
@@ -45,6 +43,11 @@ public class UserController {
 
         user.setApartmentId(apartment);
 
+        return user;
+    }
+
+    @GetMapping
+    public User getUser(@AuthenticationPrincipal User user) {
         return user;
     }
 

@@ -12,9 +12,10 @@
                 <text-field v-model="userInfo.apartmentNumber" pattern="[0-9]+"
                             class="form-group-right" name="apartment" type="text" label="Квартира"/>
             </div>
+            <text-field v-model="userInfo.username" class="form-group" name="username" type="email" label="E-mail"/>
             <div class="form-group">
-                <text-field v-model="userInfo.username" class="form-group-left" name="username" type="email" label="E-mail"/>
-                <text-field v-model="userInfo.password" min="5" max="15" class="form-group-right" type="password" label="Пароль"/>
+                <text-field v-model="userInfo.newPassword" min="5" max="15" class="form-group-left" type="password" label="Новый пароль"/>
+                <text-field v-model="confirmPassword" min="5" max="15" class="form-group-right" type="password" label="Повторите пароль"/>
             </div>
             <div class="form-group">
                 <input v-model="userInfo.notify" type="checkbox" id="spam">
@@ -43,8 +44,23 @@
         components: {TextField, Alert},
         data() {
             return {
-                userInfo: {}
+                userInfo: {},
+                confirmPassword: ''
             }
+        },
+        created() {
+            this.$http.get('/users').then(result => {
+                let res = result.data,
+                    apartment = res.apartmentId,
+                    house = apartment.houseId;
+                this.userInfo = res;
+
+                this.userInfo.city = house.city;
+                this.userInfo.street = house.street;
+                this.userInfo.house = house.house;
+
+                this.userInfo.apartmentNumber = apartment.number;
+            });
         }
     }
 </script>

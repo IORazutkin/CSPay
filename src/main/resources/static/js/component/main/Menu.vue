@@ -16,6 +16,14 @@
             change(target) {
                 this.$emit('change', target);
             }
+        },
+        mounted() {
+            let menuItems = document.querySelectorAll('input[type="radio"]');
+            if (this.$route.path === '/stats') {
+                menuItems[1].checked = true;
+            } else if (this.$route.path === '/profile') {
+                menuItems[2].checked = true;
+            }
         }
     }
 </script>
@@ -23,22 +31,24 @@
 <style scoped>
     nav {
         position: fixed;
-        left: 0;
-        top: 60px;
-        width: 110px;
-        height: calc(100% - 60px);
+        left: 0; top: 60px;
+        width: 110px; height: calc(100% - 60px);
         background-color: rgba(200, 80, 0, 0.1);
         border-right: 2px solid rgba(200, 80, 0, 1);
         box-shadow: 0 0 10px rgba(200, 80, 0, 1);
         display: flex;
         justify-content: center;
         flex-direction: column;
+        transition: transform 100ms linear;
+    }
+    .nav-open {
+        transform: translateX(0);
     }
     label {
         display: inline-block;
         box-sizing: border-box;
-        height: 100px;
         border-bottom: 1px solid rgba(200, 80, 0, 0.3);
+        height: 100px;
         text-align: center;
         font-size: 12px;
         text-transform: uppercase;
@@ -46,6 +56,12 @@
         color: rgb(200, 80, 0);
         padding-top: 80px;
         position: relative;
+    }
+    @media (max-width: 700px) {
+        nav {
+            transform: translateX(-130px);
+            background-color: rgb(255, 220, 200);
+        }
     }
     label::before {
         display: block;

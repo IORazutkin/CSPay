@@ -18,11 +18,12 @@
                 </g>
             </svg>
         </div>
-        <ul class="diagram-description">
-            <li v-for="item in data" :style="{color: item.color}">
-                <span>{{item.title}}<b class="diagram-price"> - {{item.price}}</b></span>
-            </li>
-        </ul>
+        <table class="diagram-description">
+            <tr v-for="item in data">
+                <td :style="{color: item.color}" class="item-title"><span>{{item.title}}</span></td>
+                <td class="diagram-price">{{item.price}}</td>
+            </tr>
+        </table>
     </div>
 </template>
 
@@ -96,22 +97,19 @@
         font-size: 24px;
     }
     .diagram-description {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        list-style: none;
-        padding: 0;
         margin: 0 0 10px;
+        width: 100%;
     }
-    .diagram-description li {
-        font-size: 20px;
-        margin-top: 10px;
-        flex-basis: 300px;
+    .diagram-description tr {
+        font-size: 24px;
     }
     .diagram-description span {
         color: #424242;
     }
-    .diagram-description li::before {
+    .diagram-description td {
+        padding: 5px 0;
+    }
+    .diagram-description .item-title::before {
         content: '';
         display: inline-block;
         width: 15px;
@@ -119,6 +117,10 @@
         background-color: currentColor;
         border: 1px solid black;
         margin-right: 10px;
+    }
+    .diagram-price {
+        font-weight: bold;
+        text-align: right;
     }
     .diagram-price::after {
         content: '₽';

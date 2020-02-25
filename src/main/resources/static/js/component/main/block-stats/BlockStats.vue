@@ -3,7 +3,7 @@
         <h2 class="block-title">Статистика расходов</h2>
         <div class="diagram-container">
             <button class="left-arrow">&lt;</button>
-            <Diagram class="services-diagram" :r="90" :stroke-width="30"
+            <Diagram class="services-diagram" :r="100" :stroke-width="30"
                      :data="serviceData"/>
             <button class="right-arrow">&gt;</button>
         </div>
@@ -19,22 +19,22 @@
             return {
                 serviceData: [
                     {
-                        color: 'green',
+                        color: '#00ee00',
                         title: 'Газ',
                         price: 150.32
                     },
                     {
-                        color: 'yellow',
+                        color: '#eeee00',
                         title: 'Электроэнергия',
                         price: 162.79
                     },
                     {
-                        color: 'red',
+                        color: '#ff6060',
                         title: 'Горячая вода',
                         price: 691.03
                     },
                     {
-                        color: 'blue',
+                        color: '#6060ff',
                         title: 'Холодная вода',
                         price: 318.91
                     }
