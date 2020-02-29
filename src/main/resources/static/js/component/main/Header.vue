@@ -79,6 +79,10 @@
         &:active {
             background-color: rgba(0, 0, 0, 0.2);
         }
+
+        @media handheld, (min-width: 700px) {
+            display: none;
+        }
     }
     .logo {
         float: left;
@@ -93,10 +97,14 @@
     }
     .address {
         color: @secondary;
-        font-size: 18px;
+        font-size: 20px;
         line-height: 60px;
         margin-right: 20px;
         text-shadow: 0 0 5px black;
+
+        @media (max-width: 700px) {
+            display: none;
+        }
     }
     .logout {
         margin-right: 20px;
@@ -114,14 +122,6 @@
         }
         a:active {
             filter: opacity(0.8);
-        }
-    }
-    @media handheld, (min-width: 700px) {
-        .header-menu {
-            display: none;
-        }
-        .address {
-            font-size: 20px;
         }
     }
 </style>

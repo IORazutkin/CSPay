@@ -48,7 +48,7 @@
         }
         @media handheld, (max-width: 700px) {
             transform: translateX(-130px);
-            background-color: fade(@primary, 10%);
+            background-color: lighten(@primary, 50%);
         }
     }
     label {
