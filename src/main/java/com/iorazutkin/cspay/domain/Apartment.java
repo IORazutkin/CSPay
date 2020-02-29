@@ -6,19 +6,19 @@ import javax.persistence.*;
 @Table
 public class Apartment {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Integer number;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "houseId")
-    private House houseId;
+    private House house;
 
     public Apartment() { }
 
-    public Apartment(Integer number, House houseId) {
+    public Apartment(Integer number, House house) {
         this.number = number;
-        this.houseId = houseId;
+        this.house = house;
     }
 
     public Long getId() {
@@ -37,11 +37,11 @@ public class Apartment {
         this.number = number;
     }
 
-    public House getHouseId() {
-        return houseId;
+    public House getHouse() {
+        return house;
     }
 
-    public void setHouseId(House houseId) {
-        this.houseId = houseId;
+    public void setHouse(House house) {
+        this.house = house;
     }
 }

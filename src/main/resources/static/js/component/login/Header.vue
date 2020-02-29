@@ -34,26 +34,27 @@
     }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+    @import '~styles/varibles';
+
     .modal-header {
         height: 60px;
         background-color: white;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+        border-bottom: 1px solid @main-border-color;
         box-shadow: 0 0 5px black;
         display: flex;
         position: relative;
-    }
-    .modal-header::after {
-        content: '';
-        transition: transform 150ms linear;
-        position: absolute;
-        bottom: -1px;
-        left: 0;
-        width: 50%;
-        height: 5px;
-        background-color: #c85000;
-    }
-    .modal-header.sign-up__mode::after {
-        transform: translateX(100%);
+
+        &::after {
+            content: '';
+            transition: transform 150ms linear;
+            position: absolute;
+            bottom: -1px; left: 0;
+            width: 50%; height: 5px;
+            background-color: @primary;
+         }
+        &.sign-up__mode::after {
+            transform: translateX(100%);
+        }
     }
 </style>

@@ -47,40 +47,27 @@
     }
 </script>
 
-<style>
-    .block-title {
-        margin: 0;
-        font-size: 26px;
-        color: #c85000;
-    }
-</style>
-<style scoped>
-    .v-enter-active, .v-leave-active {
-        transition: 200ms linear;
-    }
-    .v-enter, .v-leave-to {
-        opacity: 0;
-    }
-    .v-enter-to, .v-leave- {
-        opacity: 1;
-    }
+<style lang="less" scoped>
+    @import '~styles/varibles';
+    @import '~styles/animations';
+
+    .opacity(v);
+
     main {
         display: flex;
-        margin: 80px 20px 20px 20px;
+        margin: 80px 20px 20px 130px;
         justify-content: center;
-    }
-    @media (min-width: 700px) {
-        main {
-            margin-left: 130px;
-            margin-bottom: 20px;
+
+        @media handheld, (max-width: 700px) {
+            margin-left: 20px;
         }
     }
     section {
         flex: 0 1 1000px;
         border-radius: 10px;
-        border: 1px solid rgba(0, 0, 0, 0.3);
+        border: 1px solid @main-border-color;
         padding: 10px;
-        background-color: rgba(0, 0, 0, 0.05);
+        background-color: @main-background-color;
         box-shadow: 0 0 5px black;
         position: relative;
     }

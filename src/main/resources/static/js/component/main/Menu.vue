@@ -1,5 +1,5 @@
 <template>
-    <nav>
+    <nav class="main-menu">
         <input @change="change('/pay')" id="pay" type="radio" name="nav" class="nav-btn pay" checked/>
         <label for="pay">Оплата</label>
         <input @change="change('/stats')" id="stats" type="radio" name="nav" class="nav-btn stats"/>
@@ -28,64 +28,65 @@
     }
 </script>
 
-<style scoped>
-    nav {
+<style lang="less" scoped>
+    @import '~styles/varibles';
+
+    .main-menu {
         position: fixed;
         left: 0; top: 60px;
         width: 110px; height: calc(100% - 60px);
-        background-color: rgba(200, 80, 0, 0.1);
-        border-right: 2px solid rgba(200, 80, 0, 1);
-        box-shadow: 0 0 10px rgba(200, 80, 0, 1);
+        background-color: @primary-opacity;
+        border-right: 2px solid @primary;
+        box-shadow: 0 0 10px @primary;
         display: flex;
         justify-content: center;
         flex-direction: column;
         transition: transform 100ms linear;
-    }
-    .nav-open {
-        transform: translateX(0);
+
+        &.nav-open {
+            transform: translateX(0);
+        }
+        @media handheld, (max-width: 700px) {
+            transform: translateX(-130px);
+            background-color: fade(@primary, 10%);
+        }
     }
     label {
         display: inline-block;
         box-sizing: border-box;
-        border-bottom: 1px solid rgba(200, 80, 0, 0.3);
+        border-bottom: 1px solid fade(@primary, 30%);
         height: 100px;
         text-align: center;
         font-size: 12px;
         text-transform: uppercase;
         font-weight: bold;
-        color: rgb(200, 80, 0);
+        color: @primary;
         padding-top: 80px;
         position: relative;
-    }
-    @media (max-width: 700px) {
-        nav {
-            transform: translateX(-130px);
-            background-color: rgb(255, 220, 200);
+
+        &::before {
+            display: block;
+            content: '';
+            width: 50px; height: 50px;
+            position: absolute;
+            top: 15px; left: 30px;
+            background: no-repeat center;
+            background-size: contain;
         }
-    }
-    label::before {
-        display: block;
-        content: '';
-        width: 50px;
-        height: 50px;
-        position: absolute;
-        top: 15px;
-        left: 30px;
-        background: no-repeat center;
-        background-size: contain;
-    }
-    label:last-child {
-        border: none;
+        &:last-child {
+            border: none;
+        }
     }
     .nav-btn {
         display: none;
-    }
-    .nav-btn:checked + label {
-        background-color: rgba(200, 80, 0, 1);
-        color: white;
-    }
-    .nav-btn:checked + label::before {
-        filter: grayscale(1) brightness(10);
+
+        &:checked + label {
+            background-color: @primary;
+            color: white;
+            &::before {
+                filter: grayscale(1) brightness(10);
+            }
+        }
     }
     .pay + label::before {
         background-image: url(http://localhost:8000/images/pay.png);

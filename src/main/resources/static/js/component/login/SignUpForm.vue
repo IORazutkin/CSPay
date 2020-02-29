@@ -16,8 +16,8 @@
             <text-field v-model="confirm" class="form-group-right" type="password" label="Повторите пароль"/>
         </div>
         <div class="form-group">
-            <input v-model="userInfo.notify" type="checkbox" id="spam">
-            <label for="spam">Получать уведомления на почту</label>
+            <input class="checkbox" v-model="userInfo.notify" type="checkbox" id="spam">
+            <label class="checkbox-label" for="spam">Получать уведомления на почту</label>
         </div>
         <div class="form-group">
             <input type="submit" value="Зарегистрироваться">
@@ -29,17 +29,14 @@
 
 <script>
     import TextField from "../TextField.vue";
-    import Alert from "./Alert.vue";
+    import Alert from "../Alert.vue";
+    import {FormAlert, showAlert} from "../../methods";
     export default {
         name: "SignUpForm",
         components: {TextField, Alert},
         data() {
             return {
-                alert: {
-                    isShow: false,
-                    isSuccess: false,
-                    text: ''
-                },
+                alert: new FormAlert(),
                 userInfo: {},
                 confirm: ''
             }
@@ -50,57 +47,24 @@
             },
             formSubmit() {
                 if (this.userInfo.password !== this.confirm) {
-                    this.showAlert(true, false, 'Пароли не совпадают');
+                    showAlert(this.alert, true, false, 'Пароли не совпадают');
                 } else {
-                    this.showAlert(false);
+                    showAlert(this.alert, false);
                     this.$http.post('/users', this.userInfo).then(result => {
                         if (!result.data) {
-                            this.showAlert(true, false, 'Данный e-mail уже используется');
+                            showAlert(this.alert, true, false, 'Данный e-mail уже используется');
                         } else {
                             document.querySelector('form').reset();
                             this.clearClick();
-                            this.showAlert(true, true, 'Регистрация прошла успешно!');
-                            setTimeout(() => this.showAlert(false), 2000);
+                            showAlert(this.alert, true, true, 'Регистрация прошла успешно!');
                         }
                     });
                 }
-            },
-            showAlert(isShow, isSuccess = false, text = '') {
-                this.alert = { isShow, isSuccess, text }
             }
         }
     }
 </script>
 
 <style scoped>
-    input[type="checkbox"] {
-        display: none;
-    }
-    input[type="checkbox"] + label {
-        padding-left: 40px;
-        line-height: 28px;
-        font-weight: normal;
-    }
-    input[type="checkbox"]:hover + label::before {
-        box-shadow: inset 0 0 5px black;
-    }
-    input[type="checkbox"]:checked + label::before {
-        content: '✔';
-        border-color: #c85000;
-        background-color: rgba(200, 80, 0, 0.1);
-    }
-    input[type="checkbox"] + label::before {
-        content: '';
-        box-sizing: border-box;
-        text-align: center;
-        line-height: 25px;
-        font-size: 20px;
-        color: #c85000;
-        position: absolute;
-        left: 0;
-        width: 25px;
-        height: 25px;
-        border: 1px solid rgba(0, 0, 0, 0.3);
-        border-radius: 5px;
-    }
+
 </style>

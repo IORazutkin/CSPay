@@ -20,10 +20,11 @@ module.exports = {
                 loader: 'vue-loader'
             },
             {
-                test: /\.css$/,
+                test: /\.(less|css)$/,
                 use: [
                     'vue-style-loader',
-                    'css-loader'
+                    'css-loader',
+                    'less-loader',
                 ],
             },
             {
@@ -37,5 +38,10 @@ module.exports = {
     },
     plugins: [
         new VueLoaderPlugin()
-    ]
+    ],
+    resolve: {
+        alias: {
+            styles: path.join(__dirname, 'src', 'main', 'resources', 'style')
+        }
+    }
 };

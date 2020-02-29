@@ -1,9 +1,9 @@
 <template>
-    <section>
+    <section class="price">
         <div class="container">
             <h2 class="section-title">Стоимость услуг</h2>
-            <table>
-                <tr is="AppPriceListItem" v-for="priceItem in priceList"
+            <table class="price-list">
+                <tr class="price-list__item" is="PriceListItem" v-for="priceItem in priceList"
                     :key="priceItem.id" v-bind="priceItem" :class="'item__' + priceItem.id"></tr>
             </table>
         </div>
@@ -11,10 +11,10 @@
 </template>
 
 <script>
-    import AppPriceListItem from "./PriceListItem.vue";
+    import PriceListItem from "./PriceListItem.vue";
     export default {
-        name: "AppPriceList",
-        components: {AppPriceListItem},
+        name: "PriceList",
+        components: {PriceListItem},
         data() {
             return {
                 priceList: []
@@ -28,24 +28,27 @@
     }
 </script>
 
-<style scoped>
-    .container {
+<style lang="less" scoped>
+    @import '~styles/varibles';
+
+    .price .container {
         padding-top: 30px;
         padding-bottom: 50px;
     }
-    table {
+    .price-list {
         margin-top: 20px;
         border-collapse: collapse;
         width: 100%;
         font-size: 28px;
     }
-    tr {
+    .price-list__item {
         border-bottom: 1px solid #424242;
         filter: grayscale(1) brightness(80%);
-    }
-    tr:hover {
-        filter: none;
-        border-color: #c85000;
-        background-color: rgba(200, 80, 0, 0.1);
+
+        &:hover {
+            filter: none;
+            border-color: @primary;
+            background-color: @primary-opacity;
+        }
     }
 </style>

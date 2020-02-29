@@ -1,11 +1,11 @@
 <template>
-    <section>
+    <section class="features-section">
         <div class="container">
             <h2 class="section-title">Почему мы?</h2>
-            <ul>
+            <ul class="features">
                 <li
-                        is="AppFeatureItem" v-for="(feature, index) in features"
-                        :class="'feature-item-' + (index + 1)" :key="index"
+                        is="FeatureItem" v-for="(feature, index) in features"
+                        :class="'features__item-' + (index + 1)" :key="index"
                         v-bind="feature"></li>
             </ul>
         </div>
@@ -13,10 +13,10 @@
 </template>
 
 <script>
-    import AppFeatureItem from "./FeatureItem.vue";
+    import FeatureItem from "./FeatureItem.vue";
     export default {
-        name: "AppFeatures",
-        components: {AppFeatureItem},
+        name: "Features",
+        components: {FeatureItem},
         data() {
             return {
                 features: [
@@ -42,15 +42,17 @@
     }
 </script>
 
-<style scoped>
-    section {
-        border-bottom: 2px dashed #c85000;
+<style lang="less" scoped>
+   @import '~styles/varibles';
+
+    .features-section {
+        border-bottom: 2px dashed @primary;
+        .container {
+            padding-top: 30px;
+            padding-bottom: 50px;
+        }
     }
-    .container {
-        padding-top: 30px;
-        padding-bottom: 50px;
-    }
-    ul {
+    .features {
         list-style: none;
         margin: 20px 0 0;
         padding: 0;

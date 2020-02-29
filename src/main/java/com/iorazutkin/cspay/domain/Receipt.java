@@ -1,29 +1,36 @@
 package com.iorazutkin.cspay.domain;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
 public class Receipt {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "apartmentId")
-    private Apartment apartmentId;
-    @ManyToOne
-    @JoinColumn(name = "serviceId")
-    private Service serviceId;
-    private Float value;
-    private Boolean payStatus = false;
+    private Apartment apartment;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "receiptServicesId")
+    private List<ReceiptService> receiptServices;
+    private LocalDate formationDate;
+    private LocalDate payDate;
 
     public Receipt() {}
 
-    public Receipt(Apartment apartmentId, Service serviceId, Float value, Boolean payStatus) {
-        this.apartmentId = apartmentId;
-        this.serviceId = serviceId;
-        this.value = value;
-        this.payStatus = payStatus;
+    public Receipt(Apartment apartment, LocalDate formationDate) {
+        this.apartment = apartment;
+        this.formationDate = formationDate;
+
+        receiptServices = new ArrayList<>();
+    }
+
+    public void addReceiptService(ReceiptService receiptService) {
+        receiptServices.add(receiptService);
     }
 
     public Long getId() {
@@ -34,35 +41,35 @@ public class Receipt {
         this.id = id;
     }
 
-    public Apartment getApartmentId() {
-        return apartmentId;
+    public Apartment getApartment() {
+        return apartment;
     }
 
-    public void setApartmentId(Apartment apartmentId) {
-        this.apartmentId = apartmentId;
+    public void setApartment(Apartment apartment) {
+        this.apartment = apartment;
     }
 
-    public Service getServiceId() {
-        return serviceId;
+    public List<ReceiptService> getReceiptServices() {
+        return receiptServices;
     }
 
-    public void setServiceId(Service serviceId) {
-        this.serviceId = serviceId;
+    public void setReceiptServices(List<ReceiptService> receiptServices) {
+        this.receiptServices = receiptServices;
     }
 
-    public Float getValue() {
-        return value;
+    public LocalDate getFormationDate() {
+        return formationDate;
     }
 
-    public void setValue(Float value) {
-        this.value = value;
+    public void setFormationDate(LocalDate formationDate) {
+        this.formationDate = formationDate;
     }
 
-    public Boolean getPayStatus() {
-        return payStatus;
+    public LocalDate getPayDate() {
+        return payDate;
     }
 
-    public void setPayStatus(Boolean payStatus) {
-        this.payStatus = payStatus;
+    public void setPayDate(LocalDate payDate) {
+        this.payDate = payDate;
     }
 }

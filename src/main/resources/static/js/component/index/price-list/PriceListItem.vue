@@ -1,61 +1,62 @@
 <template>
     <tr>
-        <td class="item-title" :data-unit="unit">{{title}}</td>
-        <td class="item-price">{{price}}</td>
+        <td class="item__title" :data-unit="unit">{{title}}</td>
+        <td class="item__price">{{price}}</td>
     </tr>
 </template>
 
 <script>
     export default {
-        name: "AppPriceListItem",
+        name: "PriceListItem",
         props: ['title', 'price', 'unit']
     }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+    @import '~styles/varibles';
+
     td {
         padding: 20px 0;
     }
-    .item-price {
+    .item__price {
         padding-right: 10px;
         text-align: right;
-        color: #c85000;
+        color: @primary;
         font-weight: bold;
-    }
-    .item-price::after {
-        content: "₽";
-    }
-    .item-title {
-        padding-left: 65px;
-        position: relative;
-    }
 
-    .item-title::before {
-        content: '';
-        position: absolute;
-        top: 19px;
-        left: 20px;
-        width: 22px;
-        height: 100%;
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: top center;
-    }
-    @media (min-width: 600px) {
-        .item-title::after {
-            content: ' (' attr(data-unit) ')';
+        &::after {
+             content: "₽";
         }
     }
-    .item__2 .item-title::before {
-        background-image: url(http://localhost:8000/images/cold-water.png);
+    .item__title {
+        padding-left: 65px;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 19px; left: 20px;
+            width: 22px; height: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: top center;
+        }
+        @media (min-width: 600px) {
+            &::after {
+                content: ' (' attr(data-unit) ')';
+            }
+        }
     }
-    .item__1 .item-title::before {
+    .item__1 .item__title::before {
         background-image: url(http://localhost:8000/images/hot-water.png);
     }
-    .item__3 .item-title::before {
+    .item__2 .item__title::before {
+        background-image: url(http://localhost:8000/images/cold-water.png);
+    }
+    .item__3 .item__title::before {
         background-image: url(http://localhost:8000/images/gas.png);
     }
-    .item__4 .item-title::before {
+    .item__4 .item__title::before {
         background-image: url(http://localhost:8000/images/power.png);
     }
 </style>

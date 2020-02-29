@@ -1,9 +1,9 @@
 <template>
     <div>
         <main>
-            <app-header/>
-            <app-features/>
-            <app-price-list/>
+            <Header/>
+            <features/>
+            <price-list/>
         </main>
         <Footer/>
         <router-view></router-view>
@@ -11,13 +11,13 @@
 </template>
 
 <script>
-    import AppHeader from "../component/index/Header.vue";
-    import AppFeatures from "../component/index/features/Features.vue";
-    import AppPriceList from "../component/index/price-list/PriceList.vue";
+    import Header from "../component/index/Header.vue";
+    import Features from "../component/index/features/Features.vue";
+    import PriceList from "../component/index/price-list/PriceList.vue";
     import Footer from "../component/index/Footer.vue";
     export default {
         name: "App",
-        components: {Footer, AppPriceList, AppFeatures, AppHeader}
+        components: {Footer, PriceList, Features, Header}
     }
 </script>
 

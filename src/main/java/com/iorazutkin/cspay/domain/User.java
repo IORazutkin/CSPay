@@ -4,26 +4,26 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.Collection;
 
 @Entity
 @Table(name = "usr")
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String fullName;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "apartmentId")
-    private Apartment apartmentId;
+    private Apartment apartment;
     private String username;
     private String password;
     private Boolean notify;
-    private String cardNumber;
-    private Date cardDate;
-    private Integer cardCVV;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cardId")
+    private Card card;
 
     @Transient
     private String city;
@@ -36,9 +36,9 @@ public class User implements UserDetails {
 
     public User() { }
 
-    public User(String fullName, Apartment apartmentId, String login, String password, Boolean isNotify) {
+    public User(String fullName, Apartment apartment, String login, String password, Boolean isNotify) {
         this.fullName = fullName;
-        this.apartmentId = apartmentId;
+        this.apartment = apartment;
         this.username = login;
         this.password = password;
         this.notify = isNotify;
@@ -89,12 +89,12 @@ public class User implements UserDetails {
         this.fullName = fullName;
     }
 
-    public Apartment getApartmentId() {
-        return apartmentId;
+    public Apartment getApartment() {
+        return apartment;
     }
 
-    public void setApartmentId(Apartment apartmentId) {
-        this.apartmentId = apartmentId;
+    public void setApartment(Apartment apartment) {
+        this.apartment = apartment;
     }
 
     public String getUsername() {
@@ -109,36 +109,20 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public Boolean isNotify() {
-        return notify;
-    }
-
     public void setNotify(Boolean getNotify) {
         notify = getNotify;
     }
 
-    public String getCardNumber() {
-        return cardNumber;
+    public Boolean getNotify() {
+        return notify;
     }
 
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
+    public Card getCard() {
+        return card;
     }
 
-    public Date getCardDate() {
-        return cardDate;
-    }
-
-    public void setCardDate(Date cardDate) {
-        this.cardDate = cardDate;
-    }
-
-    public Integer getCardCVV() {
-        return cardCVV;
-    }
-
-    public void setCardCVV(Integer cardCVV) {
-        this.cardCVV = cardCVV;
+    public void setCard(Card card) {
+        this.card = card;
     }
 
     public String getCity() {

@@ -1,0 +1,23 @@
+.opacity(@name; @duration: 200ms; @from: 0; @to: 1) {
+  .@{name}-enter-active, .@{name}-leave-active {
+    transition: @duration linear;
+  }
+  .@{name}-enter, .@{name}-leave-to {
+    opacity: @from;
+  }
+  .@{name}-enter-to, .@{name}-leave- {
+    opacity: @to;
+  }
+}
+
+.scale(@name; @direction: ''; @duration: 200ms; @from: 0; @to: 1) {
+  .@{name}-enter-active, .@{name}-leave-active {
+    transition: @duration linear;
+  }
+  .@{name}-enter, .@{name}-leave-to {
+    transform: ~'scale@{direction}(@{from})';
+  }
+  .@{name}-enter-to, .@{name}-leave {
+    transform: ~'scale@{direction}(@{to})';
+  }
+}
